@@ -8,18 +8,18 @@ import threading
 import time 
 import pyttsx3
 
-url = "ws://10.25.248.243:8765"  # Server address
+url = "ws://172.22.133.48:8765"  # Server address
 
-tts = pyttsx3.init()
-tts.setProperty('rate', 160)  # Adjust speech speed for better clarity
+# tts = pyttsx3.init()
+# tts.setProperty('rate', 160)  # Adjust speech speed for better clarity
 
-speech_lock = threading.Lock()
+# speech_lock = threading.Lock()
 
-def speak_description(description):
-    with speech_lock:  # Ensure only one thread accesses speech synthesis at a time
-        print("Thread called:", description)
-        tts.say(description)
-        tts.runAndWait()
+# def speak_description(description):
+#     with speech_lock:  # Ensure only one thread accesses speech synthesis at a time
+#         print("Thread called:", description)
+#         tts.say(description)
+#         tts.runAndWait()
 
 
 # connect to server
@@ -41,7 +41,7 @@ async def send_frame():
             speech = await websocket.recv()
             if speech != "":
                 print("calling thread:", speech)
-                threading.Thread(target=speak_description, args=(speech,)).start()
+                # threading.Thread(target=speak_description, args=(speech,)).start()
             elapsed_time = time.time() - start_time
             await asyncio.sleep(max(0, frame_delay - elapsed_time))
         cap.release()
